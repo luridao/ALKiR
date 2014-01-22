@@ -1,0 +1,54 @@
+
+> cat("\n", "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"        , "\n"
++         , "> Dato                               ..." ... [TRUNCATED] 
+
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+ > Dato                                      :  Thu Jan 16 14:39:10 2014 
+ > Slag                                      :  HY 
+ > Ár                                        :  2012 
+ > Skipabólk/-ar                             :  1 2 4 5 
+ > Byrjanar og enda mánaŵ fyri ALK/ALD       :  JAN-DEC 
+ > Skipabólk/-ar, sum longdir eru lántar frá :  0 
+ > Skipabólk/-ar, sum vektir eru lántar frá  :  0 
+ > Skipabólk/-ar, sum aldrar eru lántar frá  :  0 
+ > ICES-øki                                  :  VB1 
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+> cat("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n");for(i in 1:6) cat(get(paste("abr",Slag,manFun(Arma),paste(Drift,collapse="_"),sep="_"))[i], fill .... [TRUNCATED] 
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+> Alpha	 = 0.02019525
+> Beta	 = 2.805357
+> R^2	 = 0.9567626
+> N	 = 1867
+> Veida (kg.)	  = 532110
+> Rundveida (kg.) = 590642.1
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+> cat("\n",">>>>>>>>>>>>>>","\t","ALK-lykil","\t","<<<<<<<<<<<<","\n")
+
+ >>>>>>>>>>>>>> 	 ALK-lykil 	 <<<<<<<<<<<< 
+
+> lapply(tmp1,round,3)
+
+> cat("\n",">>>>>>>>>>>>>>","\t","ALD-lykil","\t","<<<<<<<<<<<<","\n")
+
+ >>>>>>>>>>>>>> 	 ALD-lykil 	 <<<<<<<<<<<< 
+
+> lapply(tmp2,round,3)
+
+> resFun(tmp2, tmp3, new_veida_obj =  new_veida_obj)
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+ > Dato                :  Thu Jan 16 14:39:10 2014 
+ > Slag                :  HY 
+ > Ár                  :  2012 
+ > Tiŵarskeiŵ          :  JAN-DEC 
+ > Skipabólk/-ar       :  1 2 4 5 
+ > Skipabólk/-ar (lán) :  0 
+ > ICES-øki            :  VB1 
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+
+> sink();sink()

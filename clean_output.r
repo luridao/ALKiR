@@ -1,0 +1,2 @@
+system("sed 's/[[:space:]][[:punct:]][[:punct:]][[:punct:]][[:punct:]][[:space:]][[:punct:]]TRUNCATED[[:punct:]]//g' test > foo1.txt")
+system("sed 's/[[:space:]][[:punct:]][[:punct:]][[:punct:]][[:punct:]][[:space:]][[:punct:]]TRUNCATED[[:punct:]]//g' test > foo1.txt")
