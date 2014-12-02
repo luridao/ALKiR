@@ -58,7 +58,7 @@ comb.S[,'midal_vekt']  <- round(comb.S[,'midal_vekt'], 3)
 comb.b <- list(Urslitid = comb.R, Urslitid_Javnad = comb.S)
 
 # get the name of the combined quarters (jan_apr, may_aug, etc ,,,)
-qrts <- substring(file.names.ja.res,8,14)
+qrts <- substring(file.names.ja.res, 13, 19)
 qrts <- toupper(qrts)
 
 # get the fish species name 
@@ -68,8 +68,10 @@ slag.again <- substring(files,5,6)[1]
 temp        <- gsub("[^0-9]", "-", files)		# substitute characters with "-" from strings
 temp1       <- gsub("--"   , "" , temp)[1]	# substitute "--" with "-" from strings & take the first element
 drift.again <- gsub("-","_",temp1)			# substitute "-" with "_" from string
+drift.again <- gsub(ac(year_yvirlit),"",drift.again)			# substitute year_yvirlit with "" from string
+drift.again <- gsub("__","_",drift.again)			# substitute year_yvirlit with "" from string
 
-assign(paste("combB_", slag.again, drift.again, sep=""), comb.b, env=.GlobalEnv)
+assign(paste("combB_", slag.again, "_", year_yvirlit, drift.again, sep=""), comb.b, env=.GlobalEnv)
 
 cat("\n\n Fílar lagdar saman í : ")
 cat("*",paste("combB_", Slag, drift.again, ".txt", sep=""),"*",'\n')
@@ -81,7 +83,7 @@ cat(" > Slag            : ", Slag                      , '\n'
 cat(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n\n")
 
 ###	sinking the combined result to a data file	###
-sink(paste("combB_", Slag, drift.again, ".txt", sep=""))
+sink(paste("combB_", Slag, "_", year_yvirlit, drift.again, ".txt", sep=""))
 cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n")
 cat(" > Dato            : " , date()                    , '\n' 
 , "> Slag            : "    , Slag                      , '\n' 

@@ -22,16 +22,31 @@
 ## To terminate any process or stop altogether just press 'ESC'
 ##
 
+#load("ALKiR.RData")
 myencoding = "ISO-8859-14"
+#bveida_data = FALSE
 
-source('gui_alk.R', encoding=myencoding)
-source('extraFuncs.R', encoding=myencoding)
+source('libraries.R'  , encoding = myencoding)
+source('extraFuncs.R' , encoding = myencoding)
+source('uid_pwd_script.R', encoding = myencoding)
+#source('gui_alk.R'    , encoding = myencoding)
+# source('correctInfo.R', encoding = myencoding)
+
+#  if(ora_uid=="uid" | ora_pwd=="pwd")
+#  {source('gui_alk.R'    , encoding = myencoding)}
+
+
+# while(coInfo == 'n')
+# {
+# source('gui_alk.R'    , encoding = myencoding)
+# source('correctInfo.R', encoding = myencoding)
+# }
 
 ## ----- READ-IN 'Slag' ----- ##
 #slagQuestion <- readline("Sama fiskaslag? (y/n): ")
 #if(slagQuestion=='n') 
 #{
-cat("Fiskaslag", readline("Set inn fiskaslag (up, to, hy ,,,) : "), file="species.in", sep="\n")
+cat("Fiskaslag", readline("\nSet inn fiskaslag (up, to, hy ,,,) : "), file="species.in", sep="\n")
 Slag <- scan("species.in", skip = 1, quiet= TRUE, what="character")
 Slag <- toupper(Slag)
 #}
@@ -39,47 +54,48 @@ Slag <- toupper(Slag)
 #.- check whether the species is registered or not
 while(!(Slag %in% slag.list))
 {
-cat("\n", Slag,"er ikki skráset á databasu","\n\n")
+cat("\n", Slag,"er ikki skr?set ? databasu","\n\n")
 cat("Fiskaslag", readline("Set inn fiskaslag (up, to, hy ,,,) : "), file="species.in", sep="\n")
 Slag <- scan("species.in", skip = 1, quiet= TRUE, what="character")
 Slag <- toupper(Slag)
 }
 
 ## ----- READ-IN 'Oeki' ----- ##
-#areaQuestion <- readline("Sama ICES-øki? (y/n): ")
+#areaQuestion <- readline("Sama ICES-?ki? (y/n): ")
 #if(areaQuestion=='n') 
 #{
-cat("ICES-øki", readline("Set inn ICES-øki: "), file="driftsOki.in", sep="\n")
+cat("ICES-?ki", readline("Set inn ICES-?ki: "), file="driftsOki.in", sep="\n")
 Oeki <- scan("driftsOki.in", skip = 1, quiet= TRUE, what="character")
 Oeki <- toupper(Oeki)
+Oeki1 <- noquote(paste("\'", noquote(paste(unlist(strsplit(Oeki, ",")), collapse = "\',\'")), "\'", sep=""))
 
 #.- check whether the ICES-area is correct
 while(!(all(Oeki %in% c('VB1', 'VB2', 'IIA'))))
 {
 indexO <- Oeki %in% c('VB1', 'VB2', 'IIA')
-cat("\n", Oeki[!indexO],"is not a faroese ICES-area. Re-enter ICES-øki","\n\n")
-cat("ICES-øki", readline("Set inn ICES-øki aftur: "), file="driftsOki.in", sep="\n")
+cat("\n", Oeki[!indexO],"is not a faroese ICES-area. Re-enter ICES-?ki","\n\n")
+cat("ICES-?ki", readline("Set inn ICES-?ki aftur: "), file="driftsOki.in", sep="\n")
 Oeki <- scan("driftsOki.in", skip = 1, quiet= TRUE, what="character")
 Oeki <- toupper(Oeki)
+Oeki1 <- noquote(paste("\'", noquote(paste(unlist(strsplit(Oeki, ",")), collapse = "\',\'")), "\'", sep=""))
 }
 #}
 
 ## ----- MAKE sampling-summary ----- ##
-summary <- readline("Ynskir tú yvirlitstøl? (y/n): ")
+summary <- readline("Ynskir t? yvirlitst?l? (y/n): ")
 if(summary=='y') 
 {
-cat("Ár fyri yvirlistøl", readline("Set inn ár fyri yvirlitstøl: "), file="driftsArmaSmry.in", sep="\n")
+cat("?r fyri yvirlist?l", readline("Set inn ?r fyri yvirlitst?l: "), file="driftsArmaSmry.in", sep="\n")
 year_yvirlit <- scan("driftsArmaSmry.in", skip = 1, quiet= TRUE)
 
 #.- check whether the year is registered or not
 while(!(year_yvirlit %in% year.list))
 {
-cat("\n", year_yvirlit, "er ikki skráset á databasu","\n\n")
-cat("Ár fyri yvirlistøl", readline("Set inn ár fyri yvirlitstøl: "), file="driftsArmaSmry.in", sep="\n")
+cat("\n", year_yvirlit, "er ikki skr?set ? databasu","\n\n")
+cat("?r fyri yvirlist?l", readline("Set inn ?r fyri yvirlitst?l: "), file="driftsArmaSmry.in", sep="\n")
 year_yvirlit <- scan("driftsArmaSmry.in", skip = 1, quiet= TRUE)
 }
 
-cat("\n Fílur fyri yvirlitstøl gjørdur og goymdur her: ",paste(getwd(),'/Yvirlit', "_", Slag, "_", year_yvirlit, ".txt", sep=""),'\n\n')
 
 ArmaS_yvirlit <- as.numeric(paste(substring(year_yvirlit, 3, 4), "00", sep=""))
 ArmaE_yvirlit <- as.numeric(paste(substring(year_yvirlit, 3, 4), "13", sep=""))
@@ -104,15 +120,17 @@ if(summary=='y')
 source('yvirlit.R', encoding=myencoding)								 
 }
 
+cat("\n F?lur fyri yvirlitst?l gj?rdur og goymdur her: ",paste(getwd(),'/Yvirlit', "_", Slag, "_", year_yvirlit, ".txt", sep=""),'\n\n')
+
 ####################			START->SCRIPT TO LOOP 		######################
 repeat{ # START repeat  ----------------------------------------------------------------
 
 ## ----- READ-IN fleets ----- ##
-fleetQuestion <- readline("Sama skipabólk/-ar? (y/n): ")
+fleetQuestion <- readline("Sama skipab?lk/-ar? (y/n): ")
 
 if(fleetQuestion=='n') 
 {
-cat("Skipabólk/-ar", readline("Set inn skipabólk/-ar (set millumrúm millum skipabolkanumrini): "), file="drifts.in", sep="\n")
+cat("Skipab?lk/-ar", readline("Set inn skipab?lk/-ar (set millumr?m millum skipabolkanumrini): "), file="drifts.in", sep="\n")
 Drift <- DriftV <- scan("drifts.in", skip = 1, quiet= TRUE)
 
 #.- check whether the fleets are listed or not in the adopted list "bdrift.lst"
@@ -120,7 +138,7 @@ while(!(all(Drift %in% unique(bdrift$drift))))
 {
 indexF <- Drift %in% unique(bdrift$drift)
 cat("\n", Drift[!indexF],"is not listed as a fleet. Re-enter fleets","\n\n")
-cat("Skipabólk/-ar", readline("Set inn skipabólk/-ar : "), file="drifts.in", sep="\n")
+cat("Skipab?lk/-ar", readline("Set inn skipab?lk/-ar : "), file="drifts.in", sep="\n")
 Drift <- DriftV <- scan("drifts.in", skip = 1, quiet= TRUE)
 }
 
@@ -130,15 +148,15 @@ Drift <- DriftV <- scan("drifts.in", skip = 1, quiet= TRUE)
 cat(paste("", substring(months(as.Date(paste("01", 1:12, year_yvirlit, sep="-"))), 1, 3), sep=" ")		# YYMM
 , '\n', paste(substring(year_yvirlit, 3, 4), formatC(seq(01, 12), width = 2, flag = "0"), sep=""), '\n')	# example
 
-cat("Byrjanar og enda ár og mánað fyri ALK-ALD (YYMM)", readline("Set inn byrjanar ár og mánað fyri ALK-ALD (YYMM): "), file="driftsArma.in", sep="\n")
+cat("Byrjanar og enda ?r og m?na? fyri ALK-ALD (YYMM)", readline("Set inn byrjanar ?r og m?na? fyri ALK-ALD (YYMM): "), file="driftsArma.in", sep="\n")
 ArmaS <- scan("driftsArma.in", skip = 1, quiet= TRUE)
 ArmaS <- formatC(ArmaS, width=4, flag="0")
 
 #.- check whether the Start year&month is correct 
 while(!(ArmaS %in% yymm))
 {
-cat("\n", ArmaS, "is not a proper year&month. Re-enter byrjanar ár og mánað: ","\n\n")
-cat("Byrjanar og enda ár og mánað fyri ALK-ALD (YYMM)", readline("Set inn byrjanar ár og mánað fyri ALK-ALD (YYMM): "), file="driftsArma.in", sep="\n")
+cat("\n", ArmaS, "is not a proper year&month. Re-enter byrjanar ?r og m?na?: ","\n\n")
+cat("Byrjanar og enda ?r og m?na? fyri ALK-ALD (YYMM)", readline("Set inn byrjanar ?r og m?na? fyri ALK-ALD (YYMM): "), file="driftsArma.in", sep="\n")
 ArmaS <- scan("driftsArma.in", skip = 1, quiet= TRUE)
 ArmaS <- formatC(ArmaS, width=4, flag="0")
 }
@@ -146,7 +164,7 @@ ArmaS <- formatC(ArmaS, width=4, flag="0")
 cat(paste("", substring(months(as.Date(paste("01", 1:12, year_yvirlit, sep="-"))), 1, 3), sep=" ")		# YYMM
 , '\n', paste(substring(year_yvirlit, 3, 4), formatC(seq(01, 12), width = 2, flag = "0"), sep=""), '\n')	# example
 
-ArmaE <- readline("Set inn enda ár og mánað fyri ALK-ALD (YYMM): ")
+ArmaE <- readline("Set inn enda ?r og m?na? fyri ALK-ALD (YYMM): ")
 
 #.- check whether the End year&month is correct,  
 if(ArmaE %in% yymm)
@@ -158,7 +176,7 @@ ArmaE <- scan("driftsArma.in", skip = 2, quiet= TRUE)
 ArmaE <- formatC(ArmaE, width=4, flag="0")} else {
 while(!(ArmaE %in% yymm))
 {
-cat("\n", ArmaE, "is not a proper year&month. Re-enter enda ár og mánað: ")
+cat("\n", ArmaE, "is not a proper year&month. Re-enter enda ?r og m?na?: ")
 ArmaE <- readline()
 ArmaE <- formatC(ArmaE, width=4, flag="0")
 }
@@ -173,49 +191,53 @@ ArmaE <- formatC(ArmaE, width=4, flag="0")
 source('armaFun.R', encoding=myencoding)
 
 ## ----- READ-IN fleets to borrow lengths ----- ##
-cat("Skipabólk/-ar, sum longdir eru lántar frá", readline("Set inn skipabólk/-ar, sum longdir skulu lánast frá (skriva '0' um onki skal lánast): "), file="driftsLgd.in", sep="\n")
+cat("Skipab?lk/-ar, sum longdir eru l?ntar fr?", readline("Set inn skipab?lk/-ar, sum longdir skulu l?nast fr? (skriva '0' um onki skal l?nast): "), file="driftsLgd.in", sep="\n")
 Drift_Lgd_Borrow <- scan("driftsLgd.in", skip = 1, quiet= TRUE)
 
 ## ----- READ-IN fleets to borrow weights ----- ##
-cat("Skipabólk/-ar, sum vektir eru lántar frá", readline("Set inn skipabólk/-ar, sum vektir skulu lánast frá (skriva '0' um onki skal lánast): "), file="driftsVkt.in", sep="\n")
+cat("Skipab?lk/-ar, sum vektir eru l?ntar fr?", readline("Set inn skipab?lk/-ar, sum vektir skulu l?nast fr? (skriva '0' um onki skal l?nast): "), file="driftsVkt.in", sep="\n")
 Drift_Vekt_Borrow <- scan("driftsVkt.in", skip = 1, quiet= TRUE)
 
 ## ----- READ-IN fleets to borrow ages ----- ##
-cat("Skipabólk/-ar, sum aldrar eru lántar frá", readline("Set inn skipabólk/-ar, sum aldrar skulu lánast frá(skriva '0' um onki skal lánast): "), file="driftsAge.in", sep="\n")
+cat("Skipab?lk/-ar, sum aldrar eru l?ntar fr?", readline("Set inn skipab?lk/-ar, sum aldrar skulu l?nast fr?(skriva '0' um onki skal l?nast): "), file="driftsAge.in", sep="\n")
 Drift_Age_Borrow <- scan("driftsAge.in", skip = 1, quiet= TRUE)
 
 ## ----- PRINT INFORMATION on base-calculations ----- ##
 
-cat("\n","Fílur goymdur sum: ", paste("res", Slag, manFun(Arma), paste(DriftV, collapse="_"), sep="_"),"\n")
+cat("\n","F?lur goymdur sum: ", paste("res", Slag, manFun(Arma), paste(DriftV, collapse="_"), sep="_"),"\n")
 cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 cat("\n", "^ Slag                                      : "  , Slag                , "\n"
-        , "^ Skipabólk/-ar                             : "  , Drift               , "\n"
-        , "^ Byrjanar ár og mánað fyri ALK/ALD         : "  , ArmaS               , "\n"
-        , "^ Enda ár og mánað fyri ALK/ALD             : "  , ArmaE               , "\n"
-        , "^ Skipabólk/-ar, sum longdir eru lántar frá : "  , Drift_Lgd_Borrow    , "\n"
-        , "^ Skipabólk/-ar, sum vektir eru lántar frá  : "  , Drift_Vekt_Borrow   , "\n"
-        , "^ Skipabólk/-ar, sum aldrar eru lántar frá  : "  , Drift_Age_Borrow    , "\n"
-        , "^ ICES-øki                                  : "  , Oeki                , "\n")
+        , "^ Skipab?lk/-ar                             : "  , Drift               , "\n"
+        , "^ Byrjanar ?r og m?na? fyri ALK/ALD         : "  , ArmaS               , "\n"
+        , "^ Enda ?r og m?na? fyri ALK/ALD             : "  , ArmaE               , "\n"
+        , "^ Skipab?lk/-ar, sum longdir eru l?ntar fr? : "  , Drift_Lgd_Borrow    , "\n"
+        , "^ Skipab?lk/-ar, sum vektir eru l?ntar fr?  : "  , Drift_Vekt_Borrow   , "\n"
+        , "^ Skipab?lk/-ar, sum aldrar eru l?ntar fr?  : "  , Drift_Age_Borrow    , "\n"
+        , "^ ICES-?ki                                  : "  , Oeki                , "\n")
 cat("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<","\n")
+
+## ----- READ-IN fleets to borrow weights ----- ##
+cat("Inntasta veida", readline("Inntasta veida (press enter if no value): "), file="new_veida_obj.in", sep="\n")
+new_veida_obj <- scan("new_veida_obj.in", skip = 1, quiet= TRUE)
 
 ## ----- CALCULATE the fleet-based C@A ----- ##
 source('resFun.R', echo = TRUE, encoding=myencoding, max.deparse.length = 0)
 
 source('spool_all.R', echo=T, encoding=myencoding, max.deparse.length = 0)
 
-cat("\n\n >>>>>>>>>>>>>>> Trýst 'ESC' fyri at enda <<<<<<<<<<<<<<< \n")
-cat("\n >>>>>>>>>>>>>>> Um tú ynskir at steðga og halda fram seinni, skriva: source(\"interactive.R\") <<<<< \n\n")
+cat("\n\n >>>>>>>>>>>>>>> Tr?st 'ESC' fyri at enda <<<<<<<<<<<<<<< \n")
+cat("\n >>>>>>>>>>>>>>> Um t? ynskir at ste?ga og halda fram seinni, skriva: source(\"interactive.R\") <<<<< \n\n")
 
 ## ----- COMBINATE fleets ----- ##
-cat("\n","Vel fílar sum starta við \'res_\', til dømis \'res_UP_jan_apr_19_20_21\'","\n")
+cat("\n","Vel f?lar sum starta vi? \'res_\', til d?mis \'res_UP_jan_apr_19_20_21\'","\n")
 
-YesCombFlt <- readline("\n Ynskir tú at leggja fílar saman? (y/n): ")
+YesCombFlt <- readline("\n Ynskir t? at leggja f?lar saman? (y/n): ")
 #Sys.sleep(1)
-#cat("\n","Vel fílar sum starta við \'res_\', til dømis res_UP_jan_apr_19_20_21")
+#cat("\n","Vel f?lar sum starta vi? \'res_\', til d?mis res_UP_jan_apr_19_20_21")
 
 if(YesCombFlt=='y') 
 {
-res.files.choose  <- choose.files()
+res.files.choose  <- tk_choose.files()
 source("combine_fleets_interactive.R", echo=T, encoding=myencoding)
 }
 

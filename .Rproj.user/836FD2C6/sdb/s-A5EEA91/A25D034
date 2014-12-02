@@ -1,0 +1,16 @@
+{
+    "contents" : "# -------- START function to calculate the catch  -------------------------\n\nveidaFun <- function(veidatall, slag, driftv, arma, oeki)\n{\ndriftA <- paste(driftv, collapse=\"_\")\t# drifts concatenated\n\nmanarQ <- manFun(Arma)\t\t\t# months in quarter fashion\n\nif(dim(veidaDataAll)[1]!=0)\n{\n\tveidatall <- with(veidatall, veidatall[slag %in% Slag & drift %in% DriftV & arma %in% Arma & oeki %in% Oeki, ])\n\tveidatall <- sum(veidatall[,'vekt'])*1000\n} else veidatall = new_veida_obj\n\nassign(paste(\"veida\", slag, manarQ, driftA, sep=\"_\"), veidatall, env=.GlobalEnv)\nreturn(veidatall)\n\n}\n#veidaFun(veidaDataAll, Slag, DriftV, Arma, Oeki)\n\n# -------- END function to calculate the catch  -------------------------\n",
+    "created" : 1417443402004.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2307296322",
+    "id" : "A25D034",
+    "lastKnownWriteTime" : 1417447553,
+    "path" : "~/Documents/D/ALKiR/veidaFun.R",
+    "project_path" : "veidaFun.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

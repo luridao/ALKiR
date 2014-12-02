@@ -1,5 +1,5 @@
 ## ----- READ-IN fleets to borrow weights ----- ##
-cat("Inntasta veida", readline("Inntasta veida (press enter if no value: "), file="new_veida_obj.in", sep="\n")
+cat("Inntasta veida", readline("Inntasta veida (press enter if no value): "), file="new_veida_obj.in", sep="\n")
 new_veida_obj <- scan("new_veida_obj.in", skip = 1, quiet= TRUE)
 
 if (length(new_veida_obj)==0) new_veida_obj=NULL

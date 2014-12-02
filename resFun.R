@@ -1,6 +1,6 @@
-## ----- READ-IN fleets to borrow weights ----- ##
-cat("Inntasta veida", readline("Inntasta veida (press enter if no value: "), file="new_veida_obj.in", sep="\n")
-new_veida_obj <- scan("new_veida_obj.in", skip = 1, quiet= TRUE)
+# ## ----- READ-IN fleets to borrow weights ----- ##
+# cat("Inntasta veida", readline("Inntasta veida (press enter if no value): "), file="new_veida_obj.in", sep="\n")
+# new_veida_obj <- scan("new_veida_obj.in", skip = 1, quiet= TRUE)
 
 if (length(new_veida_obj)==0) new_veida_obj=NULL
 
@@ -113,11 +113,11 @@ assign(paste("res", Slag, manFun(Arma), paste(DriftV, collapse="_"), sep="_"), u
 cat(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n")
 cat(" > Dato                : ", date(), '\n' 
 , "> Slag                : ", Slag, '\n'
-, "> Ár                  : ", year_yvirlit, '\n' 
-, "> Tiðarskeið          : ", gsub("_", "-",toupper(manFun(Arma))), '\n'
-, "> Skipabólk/-ar       : ", paste(DriftV, collapse=" "), '\n'  
-, "> Skipabólk/-ar (lán) : ", lanDrifts(), '\n'
-, "> ICES-øki            : ", Oeki, '\n')
+, "> ?r                  : ", year_yvirlit, '\n' 
+, "> Ti?arskei?          : ", gsub("_", "-",toupper(manFun(Arma))), '\n'
+, "> Skipab?lk/-ar       : ", paste(DriftV, collapse=" "), '\n'  
+, "> Skipab?lk/-ar (l?n) : ", lanDrifts(), '\n'
+, "> ICES-?ki            : ", Oeki, '\n')
 cat(" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<","\n\n")
 return(urslitid.b)
 
@@ -132,7 +132,11 @@ return(urslitid.b)
 #--------------------------->  ^^^^  ^^^^^^  ^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^  ^^^^  ^^^^
 tmp1 <- alkFun(alkAll, lgdAll, Slag, Drift , Drift_Age_Borrow, Drift_Lgd_Borrow                   , Arma, Oeki)
 tmp2 <- aldFun(tmp1          , Slag, Drift , Drift_Age_Borrow, Drift_Lgd_Borrow, Drift_Vekt_Borrow, Arma, Oeki)
-tmp3 <- veidaFun(veidaDataAll, Slag, DriftV                                                       , Arma, Oeki)
+if(dim(veidaDataAll)[1]!=0) 
+	{
+	#print("") 
+	tmp3 <- veidaFun(veidaDataAll, Slag, DriftV                                                       , Arma, Oeki)
+} else tmp3 <- veidaFun(new_veida_obj, Slag, DriftV                                                       , Arma, Oeki)
 
 sink(paste("res_", Slag, "_", year_yvirlit, "_", manFun(Arma), "_", paste(DriftV, collapse="_"), ".txt", sep=""))
 resFun(tmp2, tmp3, new_veida_obj = new_veida_obj)

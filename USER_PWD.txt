@@ -3,8 +3,8 @@ ORACLE DATABASE:
 BASTA
 ----------------
 ORACLE USER:
-your_user_name
+luisr
 ----------------
 PASSWORD:
-your_password
+juanayzakarias
 ----------------

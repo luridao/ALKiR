@@ -1,0 +1,16 @@
+{
+    "contents" : "cat(paste(\"\\n______________________________________\\n\"))\ncat(paste(\"\\n Brukaranavn: \", ora_uid, '\\n', \" Loyniord   : \", ora_pwd, '\\n',sep=\"\"))\ncat(paste(\"______________________________________\\n\"))\n\n#cat('\\n\\n')\n#cat(\"CorrectInfo\", readline(\"Er hetta i lagi? (y/n): \"), file=\"CorrectInfo.in\", sep=\"\\n\")\n#coInfo <- scan(\"CorrectInfo.in\", skip = 1, quiet= TRUE, what=\"character\")\n#cat('\\n\\n')\n\n#if(ora_uid==\"uid\" | ora_pwd==\"pwd\")\n#\tsource(\"gui_alk.R\")\n",
+    "created" : 1417182162067.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "907669068",
+    "id" : "F06C8E11",
+    "lastKnownWriteTime" : 1417183315,
+    "path" : "~/Documents/D/ALKiR/correctInfo.R",
+    "project_path" : "correctInfo.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
