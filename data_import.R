@@ -23,8 +23,8 @@ conn <- odbcConnect("BASTA","luisr","juanayzakarias")
 alkAll <- sqlQuery(conn,"select a.slagkoda, a.drift, a.oeki, a.arma, b.bolknr, b.aldur, b.tal 
   FROM bpaldur b, bsyni a
   WHERE
-  a.synnr=b.synnr and a.arma > 1300 and a.arma < 1313
-  and a.slagkoda in ('UP') and a.oeki in ('VB1')
+  a.synnr=b.synnr and a.arma > 1400 and a.arma < 1413
+  and a.slagkoda in ('TO') and a.oeki in ('VB1')
   ORDER by a.arma, b.bolknr, b.aldur")
 
 colnames(alkAll)    <- c('slag', 'drift', 'oeki', 'arma', 'bolknr', 'aldur', 'tal')
@@ -36,8 +36,8 @@ colnames(alkAll)    <- c('slag', 'drift', 'oeki', 'arma', 'bolknr', 'aldur', 'ta
 lgdAll <- sqlQuery(conn, "SELECT a.slagkoda, a.drift, a.oeki, a.arma, b.bolknr, tal
   FROM blongd b, bsyni a
   WHERE
-  a.synnr=b.synnr and a.slagkoda in ('UP')
-  and a.arma > 1300 and a.arma < 1313 and a.oeki in ('VB1')
+  a.synnr=b.synnr and a.slagkoda in ('TO')
+  and a.arma > 1400 and a.arma < 1413 and a.oeki in ('VB1')
   ORDER BY b.bolknr")
 
 colnames(lgdAll) <- c('slag','drift','oeki','arma','longd','sum_matad')
@@ -49,8 +49,8 @@ colnames(lgdAll) <- c('slag','drift','oeki','arma','longd','sum_matad')
 lgdvektAll <- sqlQuery(conn, "SELECT a.slagkoda, a.drift, a.oeki, a.arma, b.lgd, b.aldur, b.vekt
   FROM bpeinkv b, bsyni a
   WHERE
-  a.synnr=b.synnr and a.slagkoda in ('UP') and a.oeki in ('VB1')
-  and a.arma > 1300 and a.arma < 1313")
+  a.synnr=b.synnr and a.slagkoda in ('TO') and a.oeki in ('VB1')
+  and a.arma > 1400 and a.arma < 1413")
 
 colnames(lgdvektAll)    <- tolower(colnames(lgdvektAll))
 colnames(lgdvektAll)[1] <- 'slag'
@@ -62,7 +62,7 @@ colnames(lgdvektAll)[1] <- 'slag'
 veidaDataAll <- sqlQuery(conn, "SELECT slagkoda, arma, drift, oeki, vekt
   FROM bveida
   WHERE
-  arma > 1300 and arma < 1313 and slagkoda in ('UP')
+  arma > 1400 and arma < 1413 and slagkoda in ('TO')
   and oeki in ('VB1')
   group by slagkoda, arma, drift, oeki, vekt
   ORDER BY slagkoda, arma, drift, oeki, vekt")

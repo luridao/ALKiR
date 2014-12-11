@@ -5,6 +5,19 @@ slag.list = c('AV','BL','BR','GF','GL','HB','HU','HV','HY','JS','KA','LD','LO','
 ## list of years in database  ##
 year.list = seq(1974, as.integer(format(Sys.Date(),'%Y')))
 
+## data frame with months in different formats  ##
+mon        <- months(seq(as.Date("2000/1/1"), by = "month", length.out = 12))
+mon_low    <- tolower(months(seq(as.Date("2000/1/1"), by = "month", length.out = 12)))
+mon_substr <-substring(tolower(months(seq(as.Date("2000/1/1"), by = "month", length.out = 12))), 1, 3)
+
+mon_df <- data.frame(mon, mon_low, mon_substr, mon_tal = 1:12)
+
+## - function to compare one element in an object with the rest ##
+compare <- function(v) all(sapply(as.list(v[-1]), FUN=function(z) {identical(z, v[1])}))
+
+## - Filters to select files in function "combine_fleets_interactive.R" ##
+Filters <- matrix(c("Text", "res_*.txt"), 1, 2, byrow = TRUE)
+
 ## labels for printing out lgd_vekt regression  ##
 lab.lwlogfit <- c('> Alpha\t =','> Beta\t =','> R^2\t =', '> N\t =', '> Veida (kg.)\t  =', '> Rundveida (kg.) =')
 
@@ -104,7 +117,7 @@ return(res0)
 ## Various utilities ##
 
 #------------------------------------------------------
-# Quarters to choose for 'Yvirlitstølini'  ------------
+# Quarters to choose for 'Yvirlitst?lini'  ------------
 qrt   = 3
 qrt.l = 12 / qrt
 #------------------------------------------------------

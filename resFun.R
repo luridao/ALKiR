@@ -109,7 +109,7 @@ urslitid.j[ind.j, 'aldur']  <- "Sum"
 urslitid.b <- list(URSLITID = urslitid, URSLITID.j = urslitid.j)
 
 # assign the result list to the workspace
-assign(paste("res", Slag, manFun(Arma), paste(DriftV, collapse="_"), sep="_"), urslitid.b, env=.GlobalEnv)
+assign(paste("res", Slag, year_yvirlit, manFun(Arma), paste(DriftV, collapse="_"), sep="_"), urslitid.b, env=.GlobalEnv)
 cat(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n")
 cat(" > Dato                : ", date(), '\n' 
 , "> Slag                : ", Slag, '\n'

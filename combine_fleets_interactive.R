@@ -1,6 +1,11 @@
 
-file.names.no.res <- unlist(lapply(strsplit(res.files.choose, "res"), function(x) x[[2]]))
-file.names.ja.res <- paste("res", file.names.no.res, sep="")
+# Filters <- matrix(c("Text", "res_*.txt"),
+# 	  1, 2, byrow = TRUE)
+# 
+# res.files.choose  <- tk_choose.files(caption = "Select \'res\' files", filters = Filters)
+# 
+# file.names.no.res <- unlist(lapply(strsplit(res.files.choose, "res"), function(x) x[[2]]))
+# file.names.ja.res <- paste("res", file.names.no.res, sep="")
 
 # ------- START function to combine final result -----------------
 
@@ -73,11 +78,11 @@ drift.again <- gsub("__","_",drift.again)			# substitute year_yvirlit with "" fr
 
 assign(paste("combB_", slag.again, "_", year_yvirlit, drift.again, sep=""), comb.b, env=.GlobalEnv)
 
-cat("\n\n Fílar lagdar saman í : ")
+cat("\n\n F?lar lagdar saman ? : ")
 cat("*",paste("combB_", Slag, drift.again, ".txt", sep=""),"*",'\n')
 cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n")
 cat(" > Slag            : ", Slag                      , '\n' 
-, "> Ár              : "  , year_yvirlit              , '\n'
+, "> ?r              : "  , year_yvirlit              , '\n'
 , "> Quarters/periods: "  , paste(qrts,collapse=", ") , '\n'
 , "> Combined fleets :"   , gsub("_"," ",drift.again) , '\n')
 cat(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n\n")
@@ -87,8 +92,8 @@ sink(paste("combB_", Slag, "_", year_yvirlit, drift.again, ".txt", sep=""))
 cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>","\n")
 cat(" > Dato            : " , date()                    , '\n' 
 , "> Slag            : "    , Slag                      , '\n' 
-, "> Ár              : "    , year_yvirlit              , '\n'
-, "> Tíðarskeið      : "    , paste(qrts,collapse=", ") , '\n'
+, "> ?r              : "    , year_yvirlit              , '\n'
+, "> T??arskei?      : "    , paste(qrts,collapse=", ") , '\n'
 , "> Combined fleets :"    , gsub("_"," ",drift.again) , '\n')
 cat(" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<","\n\n")
 
@@ -101,3 +106,4 @@ return(comb.b)
 combFunInt(file.names.ja.res)
 sink(file=NULL)
 
+# ------- END function to combine final result -----------------

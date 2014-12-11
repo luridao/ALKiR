@@ -40,6 +40,8 @@ yvirlit_lgd_man
 
 yvirlit_lgd_man <- raetRow(yvirlit_lgd_man)
 
+if(fleetCategory_question)
+{
 # summary by 'ls1' fleetCategory_UP
 yvirlit_lgd_man1 <- with(yvirlit_lgd, tapply(sum_matad, list(arma=arma, ls=ls1),sum))
 yvirlit_lgd_man1[is.na(yvirlit_lgd_man1)] <- 0
@@ -47,6 +49,7 @@ ncol_lgd1        <- ncol(yvirlit_lgd_man1)
 yvirlit_lgd_man1
 
 yvirlit_lgd_man1 <- raetRow(yvirlit_lgd_man1)
+} else {}
 
 # ---- Quarter summary ---- by ls
 yvirlit_lgd_qrt           <- data.frame(yvirlit_lgd_man)
@@ -56,6 +59,8 @@ yvirlit_lgd_qrt           <- aggregate(yvirlit_lgd_qrt[,1:ncol_lgd], list(Qrt = 
 colnames(yvirlit_lgd_qrt) <- c('Qrt',colnames(yvirlit_lgd_man))
 yvirlit_lgd_qrt
 
+if(fleetCategory_question)
+{
 # ---- Quarter summary ---- by ls1
 yvirlit_lgd_qrt1           <- data.frame(yvirlit_lgd_man1)
 #colnames(yvirlit_lgd_qrt) <- gsub('X', '', colnames(yvirlit_lgd_qrt))
@@ -63,6 +68,7 @@ yvirlit_lgd_qrt1$extra     <- rep(1:qrt, each = qrt.l)
 yvirlit_lgd_qrt1           <- aggregate(yvirlit_lgd_qrt1[,1:ncol_lgd1], list(Qrt = yvirlit_lgd_qrt1$extra), sum)
 colnames(yvirlit_lgd_qrt1) <- c('Qrt',colnames(yvirlit_lgd_man1))
 yvirlit_lgd_qrt1
+} else {}
 
 #------------------------------------------------------
 ######		Weight Summary		#######
@@ -89,6 +95,8 @@ yvirlit_wei_man
 
 yvirlit_wei_man <- raetRow(yvirlit_wei_man)
 
+if(fleetCategory_question)
+{
 # summary by 'ls1' fleetCategory_UP
 yvirlit_wei_man1 <- with(yvirlit_wei, tapply(vekt, list(arma=arma, ls=ls1),function(x) sum(!is.na(x))))
 yvirlit_wei_man1[is.na(yvirlit_wei_man1)] <- 0
@@ -96,6 +104,7 @@ ncol_wei1        <- ncol(yvirlit_wei_man1)
 yvirlit_wei_man1
 
 yvirlit_wei_man1 <- raetRow(yvirlit_wei_man1)
+} else {}
 
 # ---- Quarter summary ---- by ls
 yvirlit_wei_qrt           <- data.frame(yvirlit_wei_man)
@@ -105,6 +114,8 @@ yvirlit_wei_qrt           <- aggregate(yvirlit_wei_qrt[,1:ncol_wei], list(Qrt = 
 colnames(yvirlit_wei_qrt) <- c('Qrt', colnames(yvirlit_wei_man))
 yvirlit_wei_qrt
 
+if(fleetCategory_question)
+{
 # ---- Quarter summary ---- by ls1
 yvirlit_wei_qrt1           <- data.frame(yvirlit_wei_man1)
 #colnames(yvirlit_lgd_qrt) <- gsub('X', '', colnames(yvirlit_lgd_qrt))
@@ -112,7 +123,7 @@ yvirlit_wei_qrt1$extra     <- rep(1:qrt, each = qrt.l)
 yvirlit_wei_qrt1           <- aggregate(yvirlit_wei_qrt1[,1:ncol_wei1], list(Qrt = yvirlit_wei_qrt1$extra), sum)
 colnames(yvirlit_wei_qrt1) <- c('Qrt',colnames(yvirlit_wei_man1))
 yvirlit_wei_qrt1
-
+} else {}
 #------------------------------------------------------
 ######		Age Summary		#######
 #------------------------------------------------------
@@ -138,6 +149,8 @@ yvirlit_age_man
 
 yvirlit_age_man <- raetRow(yvirlit_age_man)
 
+if(fleetCategory_question)
+{
 # summary by 'ls1' fleetCategory_UP
 yvirlit_age_man1 <- with(yvirlit_age, tapply(tal, list(arma=arma, ls=ls1),sum))
 yvirlit_age_man1[is.na(yvirlit_age_man1)] <- 0
@@ -145,6 +158,7 @@ ncol_age1        <- ncol(yvirlit_age_man1)
 yvirlit_age_man1
 
 yvirlit_age_man1 <- raetRow(yvirlit_age_man1)
+} else {}
 
 # ---- Quarter summary ---- by ls
 yvirlit_age_qrt           <- data.frame(yvirlit_age_man)
@@ -154,6 +168,8 @@ yvirlit_age_qrt           <- aggregate(yvirlit_age_qrt[,1:ncol_age], list(Qrt = 
 colnames(yvirlit_age_qrt) <- c('Qrt', colnames(yvirlit_age_man))
 yvirlit_age_qrt
 
+if(fleetCategory_question)
+{
 # ---- Quarter summary ---- by ls1
 yvirlit_age_qrt1           <- data.frame(yvirlit_age_man1)
 #colnames(yvirlit_lgd_qrt) <- gsub('X', '', colnames(yvirlit_lgd_qrt))
@@ -161,7 +177,7 @@ yvirlit_age_qrt1$extra     <- rep(1:qrt, each = qrt.l)
 yvirlit_age_qrt1           <- aggregate(yvirlit_age_qrt1[,1:ncol_age1], list(Qrt = yvirlit_age_qrt1$extra), sum)
 colnames(yvirlit_age_qrt1) <- c('Qrt',colnames(yvirlit_age_man1))
 yvirlit_age_qrt1
-
+} else {}
 
 if(dim(veidaDataAll)[1]!=0)
 {
@@ -189,6 +205,8 @@ yvirlit_lan_man
 
 yvirlit_lan_man <- raetRow(yvirlit_lan_man)
 
+if(fleetCategory_question)
+{
 # summary by 'ls1' fleetCategory_UP
 yvirlit_lan_man1 <- with(yvirlit_lan, tapply(vekt,list(arma=arma, ls=ls1),sum))
 yvirlit_lan_man1[is.na(yvirlit_lan_man1)] <- 0
@@ -196,7 +214,7 @@ ncol_lan1        <- ncol(yvirlit_lan_man1)
 yvirlit_lan_man1
 
 yvirlit_lan_man1 <- raetRow(yvirlit_lan_man1)
-
+} else {}
 
 # ---- Quarter summary ---- by ls
 yvirlit_lan_qrt           <- data.frame(yvirlit_lan_man)
@@ -206,6 +224,8 @@ yvirlit_lan_qrt           <- aggregate(yvirlit_lan_qrt[,1:ncol_lan], list(Qrt = 
 colnames(yvirlit_lan_qrt) <- c('Qrt', colnames(yvirlit_lan_man))
 yvirlit_lan_qrt
 
+if(fleetCategory_question)
+{
 # ---- Quarter summary ---- by ls1
 yvirlit_lan_qrt1           <- data.frame(yvirlit_lan_man1)
 #colnames(yvirlit_lgd_qrt) <- gsub('X', '', colnames(yvirlit_lgd_qrt))
@@ -213,6 +233,8 @@ yvirlit_lan_qrt1$extra     <- rep(1:qrt, each = qrt.l)
 yvirlit_lan_qrt1           <- aggregate(yvirlit_lan_qrt1[,1:ncol_lan1], list(Qrt = yvirlit_lan_qrt1$extra), sum)
 colnames(yvirlit_lan_qrt1) <- c('Qrt',colnames(yvirlit_lan_man1))
 yvirlit_lan_qrt1
+} else {}
+
 }
 
 ######  A handy summary of fleets and their numerical identification
@@ -226,8 +248,7 @@ if(dim(veidaDataAll)[1]!=0)
 # ------------------------------------------------------------------------
 #######	 SINK ALL THE SUMMARY RESULTS TO A FILE		##############
 # ------------------------------------------------------------------------
-if(dim(veidaDataAll)[1]!=0)
-{
+
 sink(paste("Yvirlit", "_",Slag,"_",year_yvirlit, ".txt", sep=""))
 
 cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -250,72 +271,75 @@ print(drifts.stutt) }
 cat('\n\n-------------------------- Lengths-summary -------------------------- \n')
 print(yvirlit_lgd_mand)
 cat('\n')
-print(yvirlit_lgd_man1)
+if(fleetCategory_question) print(yvirlit_lgd_man1) else {}
 cat('\n')
-print(yvirlit_lgd_qrt1)
+if(fleetCategory_question) print(yvirlit_lgd_qrt1) else {}
 cat('\n-------------------------- Weight-summary  -------------------------- \n')
 print(yvirlit_wei_mand)
 cat('\n')
-print(yvirlit_wei_man1)
+if(fleetCategory_question) print(yvirlit_wei_man1) else {}
 cat('\n')
-print(yvirlit_wei_qrt1)
+if(fleetCategory_question) print(yvirlit_wei_qrt1) else {}
 cat('\n-------------------------- Age-summary     --------------------------- \n')
 print(yvirlit_age_mand)
 cat('\n')
-print(yvirlit_age_man1)
+if(fleetCategory_question) print(yvirlit_age_man1) else {}
 cat('\n')
-print(yvirlit_age_qrt1)
+if(fleetCategory_question) print(yvirlit_age_qrt1) else {}
+
+if(dim(veidaDataAll)[1]!=0)
+{
 cat('\n-------------------------- Landings-summary -------------------------- \n')
 print(yvirlit_lan_mand)
 cat('\n')
-print(yvirlit_lan_man1)
+if(fleetCategory_question) print(yvirlit_lan_man1) else {}
 cat('\n')
-print(yvirlit_lan_qrt1)
+if(fleetCategory_question) print(yvirlit_lan_qrt1) else {}
+} #else {
 
 sink()
-} else {
 
-sink(paste("Yvirlit", "_",Slag,"_",year_yvirlit, ".txt", sep=""))
-
-cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-cat("\n", "Dato            : ", date(), '\n', "Slag            : ", Slag, '\n',"T??arskei?      : " , year_yvirlit , '\n')
-cat(" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<","\n\n")
-
-if(fleetCategory_question)
-{
-cat("Snella          : "         ,c(Snella[,2]          ),'\n')
-cat("Partroplus1000  : "         ,c(Partroplus1000[,2]  ),'\n')
-cat("Partrominus1000 : "         ,c(Partrominus1000[,2] ),'\n')
-cat("Lemmatroplus1000: "         ,c(Lemmatroplus1000[,2]),'\n')
-cat("Annad1          : "         ,c(Annad1[,2]          ),'\n')
-cat("Annad2          : "         ,c(Annad2[,2]          ),'\n')
-} else { 
-drifts.stutt_ind  <-  names(drifts.stutt.all) %in% drifts.stutt.sma
-drifts.stutt   <- drifts.stutt.all[drifts.stutt_ind]
-print(drifts.stutt) }
-
-
-cat('\n\n-------------------------- Lengths-summary -------------------------- \n')
-print(yvirlit_lgd_mand)
-cat('\n')
-print(yvirlit_lgd_man1)
-cat('\n')
-print(yvirlit_lgd_qrt1)
-cat('\n-------------------------- Weight-summary  -------------------------- \n')
-print(yvirlit_wei_mand)
-cat('\n')
-print(yvirlit_wei_man1)
-cat('\n')
-print(yvirlit_wei_qrt1)
-cat('\n-------------------------- Age-summary     -------------------------- \n')
-print(yvirlit_age_mand)
-cat('\n')
-print(yvirlit_age_man1)
-cat('\n')
-print(yvirlit_age_qrt1)
-sink()
-
-}
+# sink(paste("Yvirlit", "_",Slag,"_",year_yvirlit, ".txt", sep=""))
+# 
+# cat("\n",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+# cat("\n", "Dato            : ", date(), '\n', "Slag            : ", Slag, '\n',"T??arskei?      : " , year_yvirlit , '\n')
+# cat(" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<","\n\n")
+# 
+# if(fleetCategory_question)
+# {
+# cat("Snella          : "         ,c(Snella[,2]          ),'\n')
+# cat("Partroplus1000  : "         ,c(Partroplus1000[,2]  ),'\n')
+# cat("Partrominus1000 : "         ,c(Partrominus1000[,2] ),'\n')
+# cat("Lemmatroplus1000: "         ,c(Lemmatroplus1000[,2]),'\n')
+# cat("Annad1          : "         ,c(Annad1[,2]          ),'\n')
+# cat("Annad2          : "         ,c(Annad2[,2]          ),'\n')
+# } else { 
+# drifts.stutt_ind  <-  names(drifts.stutt.all) %in% drifts.stutt.sma
+# drifts.stutt   <- drifts.stutt.all[drifts.stutt_ind]
+# print(drifts.stutt) }
+# 
+# 
+# cat('\n\n-------------------------- Lengths-summary -------------------------- \n')
+# print(yvirlit_lgd_mand)
+# cat('\n')
+# print(yvirlit_lgd_man1)
+# cat('\n')
+# print(yvirlit_lgd_qrt1)
+# cat('\n-------------------------- Weight-summary  -------------------------- \n')
+# print(yvirlit_wei_mand)
+# cat('\n')
+# print(yvirlit_wei_man1)
+# cat('\n')
+# print(yvirlit_wei_qrt1)
+# cat('\n-------------------------- Age-summary     -------------------------- \n')
+# print(yvirlit_age_mand)
+# cat('\n')
+# print(yvirlit_age_man1)
+# cat('\n')
+# print(yvirlit_age_qrt1)
+# sink()
+# 
+# }
 
 
 
